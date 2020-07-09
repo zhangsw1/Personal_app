@@ -70,7 +70,7 @@ const Login = () => {
                                 prefix = {
                                     <MailTwoTone style={{color: '#1890ff'}}/>
                                 }
-                                placeholder="Password"
+                                placeholder="Code"
                                 size="large"
                                 type="password"
                                 rules = {[
