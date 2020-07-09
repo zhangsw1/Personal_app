@@ -2,6 +2,7 @@ import React from 'react';
 import {Tabs} from 'antd';
 import { UserOutlined, LockTwoTone } from '@ant-design/icons'
 import InputItem from '../../components/InputItem';
+import Submit from '../../components/SubmitButton';
 import styles from './index.module.less'
 const { TabPane } = Tabs;
 
@@ -30,6 +31,7 @@ const Login = () => {
                         ad
                     </TabPane>
                 </Tabs>
+                <Submit>Login</Submit>
             </div>
         </div>
     )
