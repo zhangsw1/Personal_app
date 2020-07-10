@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input, Form, Button, Row, Col, message } from 'antd';
 import styles from './index.module.less'
 
-const InputItem = (props) => {
+const InputItem = React.forwardRef((props, ref) => {
     const { name, rules, ...rest } = props;
     const [timing, setTiming] = useState(false); // state represent if is counting down
     const [count, setCount] = useState(props.countDown || 60); // counting down with seconds
@@ -26,7 +26,7 @@ const InputItem = (props) => {
             }, 1000)
         }
         return () => clearInterval(interval);
-    }, [timing]);
+    }, [timing, props.countDown]);
 
     if(name === 'captcha') {
         return (
@@ -52,9 +52,9 @@ const InputItem = (props) => {
     }
     return (
         <Form.Item name={name} rules={rules}>
-            <Input {...rest} />
+            <Input ref={ref} {...rest} />
         </Form.Item>
     )
-}
+});
 
 export default InputItem;

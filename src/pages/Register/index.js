@@ -3,6 +3,30 @@ import InputItem from '../../components/InputItem';
 import { Form, Popover, Progress } from 'antd';
 import styles from './index.module.less'
 
+const passwordStatusMap = {
+    ok: (
+        <div className={styles.success}>
+            Level: Strong
+        </div>
+    ),
+    pass: (
+        <div className={styles.warning}>
+            Level: Normal
+        </div>
+    ),
+    porr: (
+        <div className={styles.error}>
+            Level: Weak
+        </div>
+    )
+}
+
+const passwordProgressMap = {
+    ok: 'success',
+    pass: 'normal',
+    poor: 'exception',
+}
+
 
 const Register = () => {
     const [visible, setVisible] = useState(false);
@@ -20,15 +44,28 @@ const Register = () => {
         return promise.resolve();
     }
 
+    const getPasswordStatus = () => {
+        const value = form.getFieldValue('password');
+        if(value && value.length > 9){
+            return 'ok'
+        }
+        if(value && value.length > 5) {
+            return 'pass'
+        }
+        return 'poor'
+    }
+
     const checkPassword = (_, value) => {
         const promise = Promise;
         if(!value) {
+            // if there is no value, no need to be visible
             setVisible(!!value)
             return promise.reject('Please enter your password')
         }
-        if(!visible) {
+        if(!visible) {  // visible = false !visible = true
             setVisible(!!value);
         }
+        // if there a value, state needs to change constantly
         setPopover(!popover);
         if(value && form.getFieldValue('confirm')) {
             form.validateFields(['confirm'])
@@ -38,10 +75,12 @@ const Register = () => {
 
     const renderPasswordProgress = () => {
         const value = form.getFieldValue('password');
+        const passwordStatus = getPasswordStatus();
         return value && value.length && (
-            <div>
+            <div className={styles[`progress-${passwordStatus}`]}>
                 <Progress
-                    strokeWidth={6}
+                    status={passwordProgressMap[passwordStatus]}
+                    strokeWidth={7}
                     percent={value.length * 10 > 100 ? 100 : value.length * 10}
                     showInfo={false}
                 />
@@ -71,9 +110,17 @@ const Register = () => {
                         ]}
                     />
                     <Popover 
+                        getPopupCountainer = {(node)=>{
+                            if(node && node.parentNode) {
+                                return node.parentNode;
+                            }
+                            return node;
+                        }}
                         content = {
                             visible && (
+                                
                                 <div>
+                                    {passwordStatusMap[getPasswordStatus()]}
                                     {renderPasswordProgress()}
                                     <div>
                                         <h3>Passwords must be at least 10 characters in length, but can be much longer</h3>
