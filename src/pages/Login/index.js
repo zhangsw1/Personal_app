@@ -1,12 +1,14 @@
-import React from 'react';
-import { Tabs, Form } from 'antd';
-import { UserOutlined, LockTwoTone, MobileTwoTone, MailTwoTone } from '@ant-design/icons'
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom'
+import { Tabs, Form, Checkbox, Row} from 'antd';
+import { UserOutlined, LockTwoTone, MobileTwoTone, MailTwoTone, GithubOutlined, MailOutlined } from '@ant-design/icons'
 import InputItem from '../../components/InputItem';
 import Submit from '../../components/SubmitButton';
 import styles from './index.module.less'
 const { TabPane } = Tabs;
 
 const Login = () => {
+    const [autoLogin, setAutoLogin] = useState(true);
     const [form] = Form.useForm();
     const handleFinish = (values) => {
         console.log(values)
@@ -82,8 +84,25 @@ const Login = () => {
                             />
                         </TabPane>
                     </Tabs>
+                    <Row justify="space-between">
+                        <Checkbox 
+                        checked={autoLogin}
+                        onChange={(e)=>setAutoLogin(e.target.checked)}
+                        >
+                         Auto login
+                        </Checkbox>
+                        <a href="#">Forgot password</a>
+                    </Row>
                     <Submit>Login</Submit>
                 </Form>
+                <div className={styles.other}>
+                    Other Login: 
+                    <GithubOutlined className={styles.icon} />
+                    <MailOutlined className={styles.icon} />
+                    <Link className={styles.register} to="/register">
+                        Create Account
+                    </Link>
+                </div>
             </div>
         </div>
     )
