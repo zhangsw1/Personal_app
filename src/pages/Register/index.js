@@ -14,7 +14,7 @@ const passwordStatusMap = {
             Level: Normal
         </div>
     ),
-    porr: (
+    poor: (
         <div className={styles.error}>
             Level: Weak
         </div>
@@ -79,6 +79,7 @@ const Register = () => {
         return value && value.length && (
             <div className={styles[`progress-${passwordStatus}`]}>
                 <Progress
+                    className={styles.progress}
                     status={passwordProgressMap[passwordStatus]}
                     strokeWidth={7}
                     percent={value.length * 10 > 100 ? 100 : value.length * 10}

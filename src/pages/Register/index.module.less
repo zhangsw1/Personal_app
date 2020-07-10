@@ -1,3 +1,6 @@
+@import '~antd/es/style/themes/default.less';
+
+
 .registerContainer {
     background-image: url('https://images.app.goo.gl/goRLxmBv69hmTfU56');
     background-repeat: no-repeat;
@@ -8,5 +11,31 @@
         padding-top: 200px;
         width: 368px;
         margin: 0 auto;
+    }
+}
+
+.success,
+.warning,
+.error{
+    transition: color 0.3s;
+}
+
+.success {
+    color: @success-color
+}
+
+.warning {
+    color: @warning-color
+}
+
+.error {
+    color: @error-color
+}
+
+.progress-pass > .progress{
+    :global {
+        .ant-progress-bg {
+            background-color: @warning-color;
+        }
     }
 }
