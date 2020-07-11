@@ -1,7 +1,10 @@
 import React , {useState} from 'react';
 import InputItem from '../../components/InputItem';
-import { Form, Popover, Progress } from 'antd';
+import { Form, Popover, Progress, Row, Col, Select } from 'antd';
 import styles from './index.module.less'
+
+const { Option } = Select;
+
 
 const passwordStatusMap = {
     ok: (
@@ -31,7 +34,7 @@ const passwordProgressMap = {
 const Register = () => {
     const [visible, setVisible] = useState(false);
     const [popover, setPopover] = useState(false);
-
+    const [prefix, setPrefix] = useState('01')
     const [form] = Form.useForm();
     const handleFinish = (values) => {
         console.log(values)
@@ -165,6 +168,38 @@ const Register = () => {
                             }
                         ]}
                     />
+                    <Row>
+                        <Col span={6}>
+                            <Select
+                            size="large"
+                            value={prefix}
+                            onChange={(value)=>setPrefix(value)}
+                            style={{ width: "100%"}}
+                            >
+                            <Option value="01">+01</Option>
+                            <Option value="86">+86</Option>
+                            </Select>
+                        </Col>
+                        <Col span={18}>
+                        <InputItem 
+                            name="mobile"
+                            placeholder="Phone Number"
+                            size="large"
+                            rules = {[
+                                {
+                                    required: true,
+                                    message: "Please enter your phone number"
+                                },
+                                {
+                                    pattern: /^\d{11}$/,
+                                    message: "phone number is not valid"
+                                }
+                            ]}
+                        />
+                        </Col>
+
+                    </Row>
+
                 </Form>
             </div>
         </div>
