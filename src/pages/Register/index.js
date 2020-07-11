@@ -1,7 +1,9 @@
 import React , {useState} from 'react';
+import {Link} from 'react-router-dom'
 import InputItem from '../../components/InputItem';
 import { Form, Popover, Progress, Row, Col, Select } from 'antd';
 import styles from './index.module.less'
+import SubmitButton from '../../components/SubmitButton';
 
 const { Option } = Select;
 
@@ -199,7 +201,16 @@ const Register = () => {
                         </Col>
 
                     </Row>
-
+                    <Row justify="space-between" align="middle">
+                        <Col span={8}>
+                            <SubmitButton>Register</SubmitButton>
+                        </Col>
+                        <Col span={16}>
+                            <Link className={styles.login} to="/login">
+                                Login
+                            </Link>
+                        </Col>
+                    </Row>
                 </Form>
             </div>
         </div>
