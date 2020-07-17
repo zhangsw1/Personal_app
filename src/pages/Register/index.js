@@ -96,6 +96,7 @@ const Register = () => {
     return (
         <div className={styles.registerContainer}>
             <div className={styles.register}>
+                <h1>Register Account</h1>
                 <Form
                     form={form}
                     onFinish={handleFinish}

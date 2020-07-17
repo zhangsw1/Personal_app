@@ -21,7 +21,7 @@ const Login = () => {
                  onFinish={handleFinish}
                 >
                     <Tabs defaultActiveKey="1">
-                        <TabPane tab='login with Password' key='1'>
+                        <TabPane tab='Login with Password' key='1'>
                             <InputItem 
                                 name="username"
                                 prefix = {
@@ -52,7 +52,7 @@ const Login = () => {
                                 ]}
                             />
                         </TabPane>
-                        <TabPane tab='login with Phone' key='w'>
+                        <TabPane tab='Login with Phone' key='w'>
                         <InputItem 
                                 name="Cell"
                                 prefix = {
