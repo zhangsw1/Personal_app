@@ -15,7 +15,7 @@ const TagList = ({tags}) => {
 
     const handleInputConfirm = () => {
         let tempsTags = [...newTags];
-        if(inputValue) {
+        if(inputValue && !tags.concat(tempsTags).map(({label}) => label).includes(inputValue)) {
             tempsTags = [...tempsTags, { key: `new-${tempsTags.length}`, label:inputValue}];
         }
         setNewTags(tempsTags);
