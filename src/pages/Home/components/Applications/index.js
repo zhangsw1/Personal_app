@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Card, Tooltip, Dropdown, Menu,Avatar }from 'antd';
 import { DownloadOutlined, EditOutlined, ShareAltOutlined, EllipsisOutlined } from '@ant-design/icons'
-
+import numeral from 'numeral';
 import styles from './index.module.less';
 
 const itemMenu = (
@@ -24,6 +24,39 @@ const itemMenu = (
 
     </Menu>
 ) 
+
+const CardInfo = ({activeUser,newUser}) => (
+    <div className={styles.cardInfo}>
+        <div>
+            <p>Active User</p>
+            <p>{activeUser}</p>
+        </div>
+        <div>
+            <p>New User</p>
+            <p>{newUser}</p>
+        </div>
+    </div>
+)
+
+function formatWan(val) {
+    const v = val * 1;
+    if(!v || Number.isNaN(v)) {
+        return ""
+    }
+    let result = val;
+    if(val > 1000) {
+        result = (
+            <span>
+                {Math.floor(val / 1000)}{" "}
+                <span>
+                     thousands
+                </span>
+
+            </span>
+        )
+    }
+    return result
+}
 
 const Applications = ({list}) => {
     return (
@@ -59,6 +92,12 @@ const Applications = ({list}) => {
                     title={item.title}
                     />
                     </Card>
+                    <div>
+                        <CardInfo
+                        activeUser={formatWan(item.activeUser)}
+                        newUser={numeral(item.newUser).format('0,0')}
+                        />
+                    </div>
 
 
                 </List.Item>
