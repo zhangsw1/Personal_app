@@ -2,6 +2,8 @@ import React from 'react';
 import { List, Tag } from 'antd';
 import styles from './index.module.less'
 import {StarTwoTone, MessageFilled, LikeOutlined} from '@ant-design/icons';
+import ArticleListContent from '../ArticleListContent';
+
 
 const IconText = ({ icon, text }) => (
     <span>
@@ -22,7 +24,7 @@ const Articles = ({ list }) => {
                     key={item.id}
                     actions={[
                         <IconText key="star" icon={<StarTwoTone />}
-                        text={item.start} />,
+                        text={item.star} />,
                         <IconText key="star" icon={<LikeOutlined />}
                         text={item.like} />,
                         <IconText key="star" icon={<MessageFilled />}
