@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Card } from 'antd';
-
+import moment from 'moment';
 const Projects = ({ list }) => {
     return (
         <List
@@ -14,6 +14,9 @@ const Projects = ({ list }) => {
                     cover={<img alt={item.title} src={item.cover} />}
                     >
                         <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
+                        <div>
+                            <span>{moment(item.updateAt).fromNow()}</span>
+                        </div>
                     </Card>
                 </List.Item>
             )}
