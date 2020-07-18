@@ -12,7 +12,9 @@ const Projects = ({ list }) => {
                     <Card
                     hoverable
                     cover={<img alt={item.title} src={item.cover} />}
-                    ></Card>
+                    >
+                        <Card.Meta title={<a>{item.title}</a>} description={item.subDescription} />
+                    </Card>
                 </List.Item>
             )}
         />
