@@ -10,6 +10,8 @@ import { currentUser, fakeList } from './data';
 import styles from './index.module.less';
 
 
+const articleList=fakeList(10);
+
 const operationTabList = [{
     key: 'articles',
     tab: (
@@ -41,7 +43,7 @@ const renderChildrenByTabKey = (tabKey) => {
             return <Applications />
         case 'articles':
         default:
-            return <Articles />
+            return <Articles list={articleList}/>
     }
 }
 
