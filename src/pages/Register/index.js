@@ -194,7 +194,7 @@ const Register = () => {
                                     message: "Please enter your phone number"
                                 },
                                 {
-                                    pattern: /^\d{11}$/,
+                                    pattern: /^\d{10}$/,
                                     message: "phone number is not valid"
                                 }
                             ]}
@@ -202,6 +202,17 @@ const Register = () => {
                         </Col>
 
                     </Row>
+                    <InputItem
+                        name="captcha"
+                        size="large"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please enter verification code'
+                            }
+                        ]}
+                        placeholder="verification code"
+                    />
                     <Row justify="space-between" align="middle">
                         <Col span={8}>
                             <SubmitButton>Register</SubmitButton>
@@ -212,6 +223,7 @@ const Register = () => {
                             </Link>
                         </Col>
                     </Row>
+
                 </Form>
             </div>
         </div>

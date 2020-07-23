@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'redux-react-hook';
 import { Input, Form, Button, Row, Col, message } from 'antd';
+import {getCaptcha} from '../../actions/register';
 import styles from './index.module.less'
 
 const InputItem = React.forwardRef((props, ref) => {
+    const dispatch = useDispatch();
     const { name, rules, ...rest } = props;
     const [timing, setTiming] = useState(false); // state represent if is counting down
     const [count, setCount] = useState(props.countDown || 60); // counting down with seconds
     const handleClickCaptcha = () => {
-        message.success("Succefully received code 1234")
+        message.success("Succefully received code 1234");
+        dispatch(getCaptcha())
         setTiming(true);
     }
 
