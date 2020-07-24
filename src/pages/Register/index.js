@@ -1,5 +1,7 @@
 import React , {useState} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { useDispatch } from 'redux-react-hook';
+import {getCaptcha} from '../../api/register';
 import InputItem from '../../components/InputItem';
 import { Form, Popover, Progress, Row, Col, Select } from 'antd';
 import styles from './index.module.less'
@@ -34,6 +36,7 @@ const passwordProgressMap = {
 
 
 const Register = () => {
+    const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);
     const [popover, setPopover] = useState(false);
     const [prefix, setPrefix] = useState('01')
@@ -97,7 +100,7 @@ const Register = () => {
     const handleClickCaptcha = () => {
         form.validateFields(['username', 'email', 'password'])
             .then(() => {
-                console.log(form.getFieldsValue)
+                dispatch(getCaptcha(form.getFieldsValue(['username', 'email', 'password'])))
             })
     }
 

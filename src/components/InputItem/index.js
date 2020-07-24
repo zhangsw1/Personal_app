@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'redux-react-hook';
 import { Input, Form, Button, Row, Col, message } from 'antd';
 import styles from './index.module.less'
 
 const InputItem = React.forwardRef((props, ref) => {
-    const dispatch = useDispatch();
     const { name, rules, onClick, ...rest } = props;
     const [timing, setTiming] = useState(false); // state represent if is counting down
     const [count, setCount] = useState(props.countDown || 60); // counting down with seconds
