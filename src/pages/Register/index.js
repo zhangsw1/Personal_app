@@ -65,7 +65,7 @@ const Register = () => {
         if(!value) {
             // if there is no value, no need to be visible
             setVisible(!!value)
-            return promise.reject('Please enter your password')
+            return promise.reject()
         }
         if(!visible) {  // visible = false !visible = true
             setVisible(!!value);
@@ -93,6 +93,14 @@ const Register = () => {
             </div>
         )
     }
+
+    const handleClickCaptcha = () => {
+        form.validateFields(['username', 'email', 'password'])
+            .then(() => {
+                console.log(form.getFieldsValue)
+            })
+    }
+
     return (
         <div className={styles.registerContainer}>
             <div className={styles.register}>
@@ -102,7 +110,18 @@ const Register = () => {
                     onFinish={handleFinish}
                 >
                     <InputItem
-                        name="mail"
+                        name="username"
+                        placeholder="Username"
+                        size="large"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please enter your username"
+                            }
+                        ]}
+                    />
+                    <InputItem
+                        name="email"
                         placeholder="Email"
                         size="large"
                         rules={[
@@ -148,29 +167,14 @@ const Register = () => {
                             rules = {[
                                 {
                                     required: true,
-                                    message: "Please enter your password"
-                                },
+                                    message: "Please enter your password"                               },
                                 {
                                     validator: checkPassword,
                                 }
                             ]}
                         />
                     </Popover>
-                    <InputItem 
-                        name="confirm"
-                        placeholder="Confirm your password"
-                        size="large"
-                        type="password"
-                        rules = {[
-                            {
-                                required: true,
-                                message: "Please confirm your password"
-                            },
-                            {
-                                validator: checkConfirm,
-                            }
-                        ]}
-                    />
+
                     <Row>
                         <Col span={6}>
                             <Select
@@ -212,6 +216,7 @@ const Register = () => {
                             }
                         ]}
                         placeholder="verification code"
+                        onClick={handleClickCaptcha}
                     />
                     <Row justify="space-between" align="middle">
                         <Col span={8}>
