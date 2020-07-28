@@ -1,7 +1,7 @@
 import React , {useState} from 'react';
 import {Link} from 'react-router-dom';
 import { useDispatch } from 'redux-react-hook';
-import {getCaptcha} from '../../api/register';
+import {getCaptcha, register} from '../../actions/account';
 import InputItem from '../../components/InputItem';
 import { Form, Popover, Progress, Row, Col, Select } from 'antd';
 import styles from './index.module.less'
@@ -42,7 +42,7 @@ const Register = () => {
     const [prefix, setPrefix] = useState('01')
     const [form] = Form.useForm();
     const handleFinish = (values) => {
-        console.log(values)
+        dispatch(register(values))
     }
     const checkConfirm = (_, value) => {
         const promise = Promise;
@@ -165,8 +165,8 @@ const Register = () => {
                         <InputItem 
                             name="password"
                             placeholder="Password"
-                            size="large"
                             type="password"
+                            size="large"
                             rules = {[
                                 {
                                     required: true,
@@ -176,6 +176,21 @@ const Register = () => {
                                 }
                             ]}
                         />
+                                            <InputItem 
+                        name="confirm"
+                        placeholder="Confirm your password"
+                        size="large"
+                        type="password"
+                        rules = {[
+                            {
+                                required: true,
+                                message: "Please confirm your password"
+                            },
+                            {
+                                validator: checkConfirm,
+                            }
+                        ]}
+                    />
                     </Popover>
 
                     <Row>

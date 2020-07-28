@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
 import { Tabs, Form, Checkbox, Row} from 'antd';
-import { UserOutlined, LockTwoTone, MobileTwoTone, MailTwoTone, GithubOutlined, MailOutlined } from '@ant-design/icons'
+import { UserOutlined, LockTwoTone, MobileTwoTone, MailTwoTone, GithubOutlined, MailOutlined } from '@ant-design/icons';
+import { useDispatch } from 'redux-react-hook';
 import InputItem from '../../components/InputItem';
 import Submit from '../../components/SubmitButton';
+import { login } from '../../actions/account';
+
 import styles from './index.module.less'
 const { TabPane } = Tabs;
 
 const Login = () => {
+    const dispatch = useDispatch();
     const [autoLogin, setAutoLogin] = useState(true);
     const [form] = Form.useForm();
     const handleFinish = (values) => {
-        console.log(values)
+        dispatch(login(values));
     }
     return (
         <div className={styles.loginContainer}>

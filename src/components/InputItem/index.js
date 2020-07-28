@@ -5,7 +5,7 @@ import styles from './index.module.less'
 const InputItem = React.forwardRef((props, ref) => {
     const { name, rules, onClick, ...rest } = props;
     const [timing, setTiming] = useState(false); // state represent if is counting down
-    const [count, setCount] = useState(props.countDown || 60); // counting down with seconds
+    const [count, setCount] = useState(props.countDown || 10); // counting down with seconds
 
     useEffect(()=>{
         let interval = 0;
@@ -15,7 +15,7 @@ const InputItem = React.forwardRef((props, ref) => {
                     if(preSecond <= 1){
                         setTiming(false); // counting down finished
                         clearInterval(interval);
-                        return props.countDown || 60;
+                        return props.countDown || 10;
                     }
                     return preSecond - 1;
                 })
